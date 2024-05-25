@@ -20,9 +20,11 @@ shape="freestyle"
 eraserThickness=50
 # reading and storing all header images
 for i in list:
+    print(i)
     image=cv2.imread(f'{folder}/{i}')
     overlayList.append(image)
-header=overlayList[0]
+header=overlayList[11]
+# print(overlayList)
 print(len(overlayList))
 
 xp,yp=0,0
@@ -54,56 +56,56 @@ while True:
             # for color selction
             if y1 < 120:
                     if 250 < x1 < 450:
-                        header = overlayList[0]
+                        header = overlayList[11]
                         drawColor = (255, 0, 255)
                     elif 550 < x1 < 750:
-                        header = overlayList[1]
+                        header = overlayList[2]
                         drawColor = (255,0,0)
                     elif 800 < x1 < 950:
-                        header = overlayList[10]
+                        header = overlayList[7]
                         drawColor = (0, 255, 0)
                     elif 1050 < x1 < 1200:
-                        header = overlayList[5]
+                        header = overlayList[4]
                         drawColor = (0, 0, 0)
             # for shapes selection
             if y1 > 120 and y1 < 210:
                     if x1 < 250:
-                        header = overlayList[9]
+                        header = overlayList[13]
                     elif 250 <x1 <450 and drawColor == (255,0,255):
-                        header = overlayList[0]
+                        header = overlayList[11]
                         shape = 'freestyle'
                     elif 550 < x1 < 750 and drawColor == (255,0,255):
-                        header = overlayList[6]
+                        header = overlayList[9]
                         shape = 'circle'
                     elif 800 < x1 < 950 and drawColor == (255,0,255):
-                        header = overlayList[7]
-                        shape = 'rectangle'
-                    elif 1050 < x1 < 1200 and drawColor == (255,0,255):
-                        header = overlayList[8]
-                        shape ='ellipse'
-                    elif 250 <x1 <450 and drawColor == (255,0,0):
-                        header = overlayList[10]
-                        shape = 'freestyle'
-                    elif 550 < x1 < 750 and drawColor == (255,0,0):
-                        header = overlayList[11]
-                        shape = 'circle'
-                    elif 800 < x1 < 950 and drawColor == (255,0,0):
                         header = overlayList[12]
                         shape = 'rectangle'
-                    elif 1050 < x1 < 1200 and drawColor == (255,0,0):
-                        header = overlayList[13]
+                    elif 1050 < x1 < 1200 and drawColor == (255,0,255):
+                        header = overlayList[10]
                         shape ='ellipse'
-                    if 250 <x1 <450 and drawColor == (0,255,0):
-                        header = overlayList[1]
-                        shape = 'freestyle'
-                    elif 550 < x1 < 750 and drawColor == (0,255,0):
+                    elif 250 <x1 <450 and drawColor == (255,0,0):
                         header = overlayList[2]
+                        shape = 'freestyle'
+                    elif 550 < x1 < 750 and drawColor == (255,0,0):
+                        header = overlayList[0]
                         shape = 'circle'
-                    elif 800 < x1 < 950 and drawColor == (0,255,0):
+                    elif 800 < x1 < 950 and drawColor == (255,0,0):
                         header = overlayList[3]
                         shape = 'rectangle'
+                    elif 1050 < x1 < 1200 and drawColor == (255,0,0):
+                        header = overlayList[1]
+                        shape ='ellipse'
+                    if 250 <x1 <450 and drawColor == (0,255,0):
+                        header = overlayList[7]
+                        shape = 'freestyle'
+                    elif 550 < x1 < 750 and drawColor == (0,255,0):
+                        header = overlayList[5]
+                        shape = 'circle'
+                    elif 800 < x1 < 950 and drawColor == (0,255,0):
+                        header = overlayList[8]
+                        shape = 'rectangle'
                     elif 1050 < x1 < 1200 and drawColor == (0,255,0):
-                        header = overlayList[4]
+                        header = overlayList[6]
                         shape ='ellipse'
         cv2.circle(img,(x1,y1),25,drawColor,cv2.FILLED)
         if up[1] and up[2]==False:
