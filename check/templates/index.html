@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Air Canvas Video Chat</title>
+</head>
+<body>
+    <h1>Air Canvas Video Chat</h1>
+    <img id="video" src="{{ url_for('video_feed') }}" width="640" height="480">
+    <canvas id="canvas" width="640" height="480" style="border:1px solid black;"></canvas>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var video = document.getElementById('video');
+
+        canvas.addEventListener('mousedown', function(e) {
+            canvas.addEventListener('mousemove', onPaint);
+        });
+
+        canvas.addEventListener('mouseup', function() {
+            canvas.removeEventListener('mousemove', onPaint);
+        });
+
+        var onPaint = function(e) {
+            var x = e.offsetX;
+            var y = e.offsetY;
+            socket.emit('draw', {x: x, y: y});
+        };
+
+        socket.on('draw', function(data) {
+            var x = data.x;
+            var y = data.y;
+            context.beginPath();
+            context.arc(x, y, 5, 0, 2 * Math.PI, false);
+            context.fillStyle = 'red';
+            context.fill();
+        });
+    </script>
+</body>
+</html>
